@@ -26,9 +26,18 @@ public class ResourceGenerator {
 
 
     public ResourceGenerator() {
+        this.apiBaseUrl = "";
+        this.classNames = new ArrayList<String>();
+        this.contollers = new ArrayList<Class>();
+    }
 
-
-
+    public ControllerDetails fromClass(Class aClass){
+        for(Annotation a : aClass.getAnnotations()){
+            if(a instanceof Controller){
+                return processController(aClass);
+            }
+        }
+        return null;
     }
 
     private void findControllers() {
@@ -51,10 +60,11 @@ public class ResourceGenerator {
         }
     }
 
-    private void processController(Class c) {
+    private ControllerDetails processController(Class c) {
         // Looking for mapping
         ControllerDetails cd = new ControllerDetails(c, this.apiBaseUrl);
-        System.out.println(cd.toAngular());
+        return cd;
+
     }
 
     public void loadJars(String[] paths) {
@@ -72,7 +82,6 @@ public class ResourceGenerator {
             try {
 
                 urls.add(f.toURI().toURL());
-                System.out.println(urls.get(urls.size() - 1));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -96,19 +105,26 @@ public class ResourceGenerator {
 
     }
 
-    public void fromJars(String[] paths) {
-        this.apiBaseUrl = "http://pc59:8080/MFR/services";
-        classNames  = new ArrayList<String>();
-        contollers = new ArrayList<Class>();
-        loadJars(paths);
-        findControllers();
-        System.out.println(contollers.size() + "Spring controllers found. ");
-        processLoadedClasses();
+    public String getApiBaseUrl() {
+        return apiBaseUrl;
     }
 
-    private void processLoadedClasses() {
+    public void setApiBaseUrl(String apiBaseUrl) {
+        this.apiBaseUrl = apiBaseUrl;
+    }
+
+    public ArrayList<ControllerDetails> fromJars(String[] paths) {
+        loadJars(paths);
+        findControllers();
+        System.out.println(contollers.size() + " Spring controllers found. ");
+        return processLoadedClasses();
+    }
+
+    private ArrayList<ControllerDetails> processLoadedClasses() {
+        ArrayList<ControllerDetails> result = new ArrayList<ControllerDetails>();
         for(Class c : this.contollers){
-            processController(c);
+            result.add(processController(c));
         }
+        return result;
     }
 }

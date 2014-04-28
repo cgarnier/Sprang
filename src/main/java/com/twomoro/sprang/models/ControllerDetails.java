@@ -19,16 +19,13 @@ public class ControllerDetails {
 
     public void setClass(Class c) {
         this.contClass = c;
-        System.out.println("-- Controller: " + c.getName());
         for (Annotation a : c.getAnnotations()) {
-            //System.out.println("@: "+ a.toString());
             if (a instanceof RequestMapping) {
                 RequestMapping requestMapping = (RequestMapping) a;
 
                 this.base += requestMapping.value()[0].replace("*", "");
                 if(this.base.endsWith("/"))
                     this.base = this.base.substring(0, this.base.length() -1);
-                System.out.println("\t Mapping: " + this.base);
 
                 processMethods();
             }
@@ -43,7 +40,6 @@ public class ControllerDetails {
                     RequestMapping req = (RequestMapping) annotation;
                     MethodDetails md = new MethodDetails(method, req);
                     this.methods.add(md);
-                    System.out.println(md);
                 }
             }
         }

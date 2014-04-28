@@ -1,6 +1,7 @@
 package com.twomoro.sprang.sample;
 
 import com.twomoro.sprang.generator.ResourceGenerator;
+import com.twomoro.sprang.models.ControllerDetails;
 
 /**
  * Created by cgarnier on 24/04/14.
@@ -15,7 +16,12 @@ public class Main {
     public Main(String[] paths) {
         System.out.println("Starting sample app.");
         ResourceGenerator gen = new ResourceGenerator();
-        gen.fromJars(paths);
+        gen.setApiBaseUrl("http://pc59:8080/MFR/services");
+
+        for(ControllerDetails cd :gen.fromJars(paths)){
+            System.out.println("\n\n");
+            System.out.println(cd.toAngular());
+        }
 
 
     }
