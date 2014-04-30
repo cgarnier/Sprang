@@ -13,7 +13,7 @@ This app analyse your spring controllers by java reflection to automaticaly gene
 ## What it do ##
 
 It search in your jar or source folders for spring controllers like this:
-
+``` java
   @Controller
   @RequestMapping( "/standard/**" )
   public class StandardController {
@@ -44,9 +44,11 @@ It search in your jar or source folders for spring controllers like this:
     }
 
   }
-  
+```
+
 And genrate an angular module to call it:
 
+```javascript
   'use strict'
 
   angular.module('com.twomoro.bfly.ssx.v1.controller.StandardController', [])
@@ -105,4 +107,5 @@ And genrate an angular module to call it:
         return defer.promise;
       };
     }]);
+```
 
