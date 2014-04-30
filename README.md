@@ -1,7 +1,8 @@
 Sprang
 ======
 
-Generate AngularJs factories and resources from Spring controllers
+Generate AngularJs services from Spring controllers.
+This app analyse your spring controllers by java reflection to automaticaly generate an angularjs service ready to be used to call your api.
 
 
 Usage
