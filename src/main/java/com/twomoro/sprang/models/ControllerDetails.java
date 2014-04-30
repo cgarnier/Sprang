@@ -52,6 +52,7 @@ public class ControllerDetails {
     }
 
     public String toAngular() {
+/*
         String js = "'use strict'\n\n";
         js += "angular.module('" + contClass.getName() +"', [])\n";
         js += ".factory('" + contClass.getSimpleName().replace("Controller", "Service") + "', ['$resource',\n";
@@ -69,7 +70,15 @@ public class ControllerDetails {
                 "\n        });\n" +
                         "    }]);\n";
 
-
+*/
+        String js = "'use strict'\n\n";
+        js += "angular.module('" + contClass.getName() +"', [])\n";
+        js += ".service('" + contClass.getSimpleName().replace("Controller", "Service") + "', ['$http', '$q',\n";
+        js += "    function ($http, $q) {\n";
+        for (MethodDetails md : this.methods) {
+            js += md.toAngular(this.base);
+        }
+        js += "    }]);\n";
         return js;
     }
 
