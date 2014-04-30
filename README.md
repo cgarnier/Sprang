@@ -47,10 +47,10 @@ It search in your jar or source folders for spring controllers like this:
   
 And genrate an angular module to call it:
 
- 'use strict'
+  'use strict'
 
- angular.module('com.twomoro.bfly.ssx.v1.controller.StandardController', [])
- .service('StandardService', ['$http', '$q',
+  angular.module('com.twomoro.bfly.ssx.v1.controller.StandardController', [])
+  .service('StandardService', ['$http', '$q',
     function ($http, $q) {
       this.delete = function(params){
         var defer = $q.defer();
