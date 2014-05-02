@@ -10,7 +10,7 @@ This app analyse your spring controllers by java reflection to automaticaly gene
   * add your maven dependencies to the pom
   * Run the sample class Main with your jars as parameter 
 
-## What it do ##
+## What does it do? ##
 
 It search in your jar or source folders for spring controllers like this:
 ``` java
