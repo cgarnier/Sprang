@@ -1,0 +1,24 @@
+{{#controllers}}
+'use strict'
+
+angular.module('{{fullName}}', [])
+    .service('{{serviceName}}', ['$http', '$q',
+        function ($http, $q) {
+            {{#methods}}
+            this.{{action}} = function(params){
+                var defer = $q.defer();
+                $http({
+                    method: '{{httpMethod}}',
+                    url: '{{url}}.json',
+                    params: params
+                }).success(function(data, status){
+                    defer.resolve(data);
+                }).error(function(data,status){
+                    defer.reject({status: status, data: data});
+                });
+                return defer.promise;
+            };
+            {{/methods}}
+        }
+    ]);
+{{/controllers}}

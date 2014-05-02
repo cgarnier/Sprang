@@ -12,13 +12,34 @@ import java.util.ArrayList;
  */
 public class ControllerDetails {
 
+    private  String fullName;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    private  String serviceName;
 
     private Class contClass;
     private String base;
-    private ArrayList<MethodDetails> methods;
+    public ArrayList<MethodDetails> methods;
 
     public void setClass(Class c) {
         this.contClass = c;
+        this.serviceName = contClass.getSimpleName().replace("Controller", "Service");
+        this.fullName = contClass.getName();
         for (Annotation a : c.getAnnotations()) {
             if (a instanceof RequestMapping) {
                 RequestMapping requestMapping = (RequestMapping) a;
@@ -38,7 +59,7 @@ public class ControllerDetails {
             for (Annotation annotation : method.getAnnotations()) {
                 if (annotation instanceof RequestMapping) {
                     RequestMapping req = (RequestMapping) annotation;
-                    MethodDetails md = new MethodDetails(method, req);
+                    MethodDetails md = new MethodDetails(method, req, this.base);
                     this.methods.add(md);
                 }
             }

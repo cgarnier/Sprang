@@ -12,12 +12,12 @@ import java.util.ArrayList;
  * Created by cgarnier on 24/04/14.
  */
 public class MethodDetails {
-    private String url;
-    private String httpMethod;
-    private String action;
-    private ArrayList<ParamDetails> params;
+    public String url;
+    public String httpMethod;
+    public String action;
+    public ArrayList<ParamDetails> params;
 
-    public MethodDetails(Method method, RequestMapping req){
+    public MethodDetails(Method method, RequestMapping req, String base){
         String[] command = req.value();
         RequestMethod[] httpMethod = req.method();
         params = new ArrayList<ParamDetails>();
@@ -30,6 +30,7 @@ public class MethodDetails {
         else this.httpMethod = "GET";
 
         formatAction();
+        this.url = base + url;
         for(Annotation[] an: method.getParameterAnnotations()){
             for(Annotation a : an){
                 if( a instanceof RequestParam){
