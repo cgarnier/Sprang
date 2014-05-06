@@ -1,15 +1,15 @@
 {{#controllers}}
 'use strict'
 
-angular.module('{{fullName}}', [])
-    .service('{{serviceName}}', ['$http', '$q',
-        function ($http, $q) {
+angular.module('{{fullName}}', ['angular-sprang'])
+    .service('{{serviceName}}', ['$http', '$q', 'sprangConfig',
+        function ($http, $q, sprangConfig) {
             {{#methods}}
             this.{{action}} = function(params){
                 var defer = $q.defer();
                 $http({
                     method: '{{httpMethod}}',
-                    url: '{{url}}.json',
+                    url: sprangConfig.get('{{configName}}').url + '{{url}}.json',
                     params: params
                 }).success(function(data, status){
                     defer.resolve(data);

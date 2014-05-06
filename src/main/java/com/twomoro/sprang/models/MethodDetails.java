@@ -15,9 +15,11 @@ public class MethodDetails {
     public String url;
     public String httpMethod;
     public String action;
+    public String configName;
     public ArrayList<ParamDetails> params;
 
-    public MethodDetails(Method method, RequestMapping req, String base){
+    public MethodDetails(Method method, RequestMapping req, String base, String config){
+        this.configName = config;
         String[] command = req.value();
         RequestMethod[] httpMethod = req.method();
         params = new ArrayList<ParamDetails>();

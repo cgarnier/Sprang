@@ -21,12 +21,19 @@ public class ResourceGenerator {
     private URLClassLoader cl;
     private ArrayList<String> classNames;
     private ArrayList<Class> contollers;
-    private String apiBaseUrl;
 
+    private String configName;
 
+    public String getConfigName() {
+        return configName;
+    }
+
+    public void setConfigName(String configName) {
+        this.configName = configName;
+    }
 
     public ResourceGenerator() {
-        this.apiBaseUrl = "";
+        this.configName = "";
         this.classNames = new ArrayList<String>();
         this.contollers = new ArrayList<Class>();
     }
@@ -62,7 +69,7 @@ public class ResourceGenerator {
 
     private ControllerDetails processController(Class c) {
         // Looking for mapping
-        ControllerDetails cd = new ControllerDetails(c, this.apiBaseUrl);
+        ControllerDetails cd = new ControllerDetails(c, this.configName);
         return cd;
 
     }
@@ -105,13 +112,6 @@ public class ResourceGenerator {
 
     }
 
-    public String getApiBaseUrl() {
-        return apiBaseUrl;
-    }
-
-    public void setApiBaseUrl(String apiBaseUrl) {
-        this.apiBaseUrl = apiBaseUrl;
-    }
 
     public ArrayList<ControllerDetails> fromJars(String[] paths) {
         loadJars(paths);

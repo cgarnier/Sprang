@@ -24,7 +24,7 @@ public class Main {
         controllers = new ArrayList<ControllerDetails>();
         System.out.println("Starting sample app.");
         ResourceGenerator gen = new ResourceGenerator();
-        gen.setApiBaseUrl("http://pc59:8080/MFR/services");
+        gen.setConfigName("bflyApi");
 
         this.controllers = gen.fromJars(paths);
 /*        for(ControllerDetails cd :this.controllers){
@@ -33,7 +33,7 @@ public class Main {
         }*/
 
         MustacheFactory mf = new DefaultMustacheFactory();
-        Mustache mustache = mf.compile("templates/template.mustache");
+        Mustache mustache = mf.compile("templates/serviceTpl.mustache");
         try {
             mustache.execute(new PrintWriter(System.out), this).flush();
         } catch (IOException e) {

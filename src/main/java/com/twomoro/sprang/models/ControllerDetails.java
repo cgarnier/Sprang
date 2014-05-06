@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class ControllerDetails {
 
+    private final String config;
     private  String fullName;
 
     public String getFullName() {
@@ -59,15 +60,16 @@ public class ControllerDetails {
             for (Annotation annotation : method.getAnnotations()) {
                 if (annotation instanceof RequestMapping) {
                     RequestMapping req = (RequestMapping) annotation;
-                    MethodDetails md = new MethodDetails(method, req, this.base);
+                    MethodDetails md = new MethodDetails(method, req, this.base, this.config);
                     this.methods.add(md);
                 }
             }
         }
     }
 
-    public ControllerDetails(Class c, String baseUrl) {
-        this.base = baseUrl;
+    public ControllerDetails(Class c, String config) {
+        this.config = config;
+        this.base = "";
         this.methods = new ArrayList<MethodDetails>();
         this.setClass(c);
     }
