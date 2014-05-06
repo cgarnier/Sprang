@@ -1,6 +1,6 @@
 
 'use strict'
-
+{{#controllers}}
 angular.module('{{fullName}}', ['angular-sprang'])
     .service('{{serviceName}}', ['$http', '$q', 'sprangConfig',
         function ($http, $q, sprangConfig) {
@@ -21,3 +21,4 @@ angular.module('{{fullName}}', ['angular-sprang'])
             {{/methods}}
         }
     ]);
+{{/controllers}}
