@@ -16,6 +16,6 @@
     // Controllers list (from the dependencies)
     "controllers" :[],
     // Search all controllers in this list of jars
-    "controllersJars" : ["bfly-ssx-3.9.1.jar"]
+    "controllersJars" : ["D:/DEV/BFLY_SERVER/2M_WEBAPP/MFR/WEB-INF/lib/bfly-ssx-3.9.1.jar"]
 
 }
