@@ -1,0 +1,21 @@
+{
+"dependencies":{
+    // Is a directory which contains *.class or *.jar
+    "classpath":["D:/DEV/BFLY_SERVER/2M_WEBAPP/MFR/WEB-INF/lib"],
+    // Add jar one by one
+    "jars":[]
+    },
+"output":{
+    // Where the angularjs modules will be stored
+    "path":"D:/DEV/AirCobot/client/app/SprangOutput/",
+    // All modules in one file or one file per module
+    "oneFile":false,
+    // The config name of angular-sprang module (available on bower.io)
+    "configName":"bflyApi"
+    },
+    // Controllers list (from the dependencies)
+    "controllers" :[],
+    // Search all controllers in this list of jars
+    "controllersJars" : ["bfly-ssx-3.9.1.jar"]
+
+}
