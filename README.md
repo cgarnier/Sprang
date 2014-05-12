@@ -22,6 +22,34 @@ Modify the conf.json file to configure the app. Customize the templates in the t
 java -jar target/Sprang-....jar
 ```
 
+### Configuration ###
+To configure Sprang, use config.json.
+
+``` json
+{
+  "dependencies":{
+    "classpath":[],
+    "jars":[]
+    },
+  "output":{
+    "path":"./SprangOutput/",
+    "oneFile":false,
+    "configName":"bflyApi"
+    },
+  "controllers" :[],
+  "controllersJars" : ["D:/DEV/BFLY_SERVER/2M_WEBAPP/MFR/WEB-INF/lib/bfly-ssx-3.9.1.jar"]
+
+}
+```
+  * dependencies.classpath : List of directories where look for additionnals deps of your Spring project. Should be a dir of class or jars.
+  * dependencies.jars : List of jar for additionnals deps too.
+  * output.path: Directory where generated angular module will be put.
+  * output.oneFile: If true all modules will be write in one file else, there you will have one file per modules.
+  * output.configName: the generated modules use Sprang Config provider. You can get it on bower (bower install angular-sprang) or on [my github](https://github.com/cgarnier/angular-sprang). The config name specify the config to use. It usefull if you need to set an url or some other thing to your templates.
+  * controllers: the list of Spring controllers you need to generate a angular module for.
+  * controllersJars: all spring controllers of this jar list will be found and an angular module will be generated to each one. (You dont require to add controllers one by one in the controllers list).
+
+
 ## What does it do? ##
 
 It search in your jar or source folders for spring controllers like this:
