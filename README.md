@@ -7,8 +7,20 @@ This app analyse your spring controllers by java reflection to automaticaly gene
 
 ## Usage ##
 
-  * add your maven dependencies to the pom
-  * Run the sample class Main with your jars as parameter 
+You can use it as a library or use the sample app to generate the javascript source code.
+
+
+### Sample app ###
+
+``` bash
+git clone https://github.com/cgarnier/Sprang.git
+cd Sprang
+nvm package
+```
+Modify the conf.json file to configure the app. Customize the templates in the template folder if you dont like it. And run the app.
+``` bash
+java -jar target/Sprang-....jar
+```
 
 ## What does it do? ##
 
@@ -49,63 +61,66 @@ It search in your jar or source folders for spring controllers like this:
 And genrate an angular module to call it:
 
 ```javascript
-  'use strict'
 
-  angular.module('com.twomoro.bfly.ssx.v1.controller.StandardController', [])
-  .service('StandardService', ['$http', '$q',
-    function ($http, $q) {
-      this.delete = function(params){
-        var defer = $q.defer();
-        $http({
-          method: 'GET',
-          url: 'http://pc59:8080/MFR/services/standard/delete.json',
-          params: params
-        }).success(function(data, status){
-          defer.resolve(data);
-        }).error(function(data,status){
-          defer.reject({status: status, data: data});
-        });
-        return defer.promise;
-      };
-      this.list = function(params){
-        var defer = $q.defer();
-        $http({
-          method: 'GET',
-          url: 'http://pc59:8080/MFR/services/standard/list.json',
-          params: params
-        }).success(function(data, status){
-          defer.resolve(data);
-        }).error(function(data,status){
-          defer.reject({status: status, data: data});
-        });
-        return defer.promise;
-      };
-      this.getbyid = function(params){
-        var defer = $q.defer();
-        $http({
-          method: 'GET',
-          url: 'http://pc59:8080/MFR/services/standard/getbyid.json',
-          params: params
-        }).success(function(data, status){
-          defer.resolve(data);
-        }).error(function(data,status){
-          defer.reject({status: status, data: data});
-        });
-        return defer.promise;
-      };
-      this.saveorupdate = function(params){
-        var defer = $q.defer();
-        $http({
-          method: 'GET',
-          url: 'http://pc59:8080/MFR/services/standard/saveorupdate.json',
-          params: params
-        }).success(function(data, status){
-          defer.resolve(data);
-        }).error(function(data,status){
-          defer.reject({status: status, data: data});
-        });
-        return defer.promise;
-      };
-    }]);
+'use strict'
+
+angular.module('com.twomoro.bfly.ssx.v1.controller.StandardController', ['angular-sprang'])
+    .service('StandardService', ['$http', '$q', 'sprangConfig',
+        function ($http, $q, sprangConfig) {
+            this.getbyid = function(params){
+                var defer = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: sprangConfig.get('bflyApi').url + '/standard/getbyid.json',
+                    params: params
+                }).success(function(data, status){
+                    defer.resolve(data);
+                }).error(function(data,status){
+                    defer.reject({status: status, data: data});
+                });
+                return defer.promise;
+            };
+            this.list = function(params){
+                var defer = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: sprangConfig.get('bflyApi').url + '/standard/list.json',
+                    params: params
+                }).success(function(data, status){
+                    defer.resolve(data);
+                }).error(function(data,status){
+                    defer.reject({status: status, data: data});
+                });
+                return defer.promise;
+            };
+            this.saveorupdate = function(params){
+                var defer = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: sprangConfig.get('bflyApi').url + '/standard/saveorupdate.json',
+                    params: params
+                }).success(function(data, status){
+                    defer.resolve(data);
+                }).error(function(data,status){
+                    defer.reject({status: status, data: data});
+                });
+                return defer.promise;
+            };
+            this.delete = function(params){
+                var defer = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: sprangConfig.get('bflyApi').url + '/standard/delete.json',
+                    params: params
+                }).success(function(data, status){
+                    defer.resolve(data);
+                }).error(function(data,status){
+                    defer.reject({status: status, data: data});
+                });
+                return defer.promise;
+            };
+        }
+    ]);
+
 ```
 
