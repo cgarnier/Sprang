@@ -34,10 +34,10 @@ To configure Sprang, use config.json.
   "output":{
     "path":"./SprangOutput/",
     "oneFile":false,
-    "configName":"bflyApi"
+    "configName":"myApi"
     },
   "controllers" :[],
-  "controllersJars" : ["D:/DEV/BFLY_SERVER/2M_WEBAPP/MFR/WEB-INF/lib/bfly-ssx-3.9.1.jar"]
+  "controllersJars" : ["springProject.jar"]
 
 }
 ```
