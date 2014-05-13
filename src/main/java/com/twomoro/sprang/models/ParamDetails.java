@@ -32,7 +32,5 @@ public class ParamDetails {
         this.required = required;
     }
 
-    public String toAngular() {
-        return this.name + ": '@" + this.name +"'";
-    }
+
 }

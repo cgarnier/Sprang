@@ -89,37 +89,5 @@ public class MethodDetails {
         return "\t\t Command: " + url +", Method: " + httpMethod;
     }
 
-    public String toAngular(String baseUrl){
-        String result = "";
-        result += "      this." + this.action +" = function(params){\n";
-        result += "        var defer = $q.defer();\n";
-        result += "        $http({\n";
-        result += "          method: '" +this.httpMethod + "',\n";
-        result += "          url: '" + baseUrl + this.url + ".json',\n";
-        result += "          params: params\n";
-        result += "        }).success(function(data, status){\n";
-        result += "          defer.resolve(data);\n";
-        result += "        }).error(function(data,status){\n";
-        result += "          defer.reject({status: status, data: data});\n";
-        result += "        });\n";
-        result += "        return defer.promise;\n";
-        result += "      };\n";
 
-
-
-        //result = "'" + this.action + "': { url: '" + baseUrl + this.url + ".json', method: '" + this.httpMethod +"'";
-/*        if(this.params.size() > 0){
-            result += ", params: {";
-            for (int i = 0; i < this.params.size(); i++) {
-                if(i > 0) result += ", ";
-                result += this.params.get(i).toAngular();
-            }
-            result += "}";
-        }*/
-        //result += "};";
-        return result;
-    }
-    public String toAngular(){
-        return toAngular("");
-    }
 }
