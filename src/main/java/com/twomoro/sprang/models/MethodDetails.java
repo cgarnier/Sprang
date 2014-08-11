@@ -51,7 +51,10 @@ public class MethodDetails {
     private void formatAction() {
         if(url.length() < 1) return;
         String[] splitedUrl = this.url.split("/");
-        this.action = splitedUrl[0];
+        if(splitedUrl.length > 0)
+            this.action = splitedUrl[0];
+        else
+            this.action = "root";
         if(splitedUrl.length > 1)
             for (int i = 1; i < splitedUrl.length; i++) {
                 if(i == 1 && this.url.startsWith("/")) this.action += splitedUrl[i];
